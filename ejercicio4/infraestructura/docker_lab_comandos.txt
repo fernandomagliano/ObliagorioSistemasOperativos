@@ -1,0 +1,68 @@
+ESTRUCTURA DE DIRECTORIOS
+----------------------------
+mkdir infraestructura
+cd infraestructura
+
+mkdir maquina backup explorador
+touch docker-compose.yml
+
+CREACIÓN DE ARCHIVOS
+------------------------
+# Crear Dockerfile de maquina
+nano maquina/Dockerfile
+
+# Crear Dockerfile de backup y script
+touch backup/Dockerfile
+touch backup/backup.sh
+chmod +x backup/backup.sh
+
+# Crear Dockerfile de explorador y script
+touch explorador/Dockerfile
+touch explorador/explorar.sh
+chmod +x explorador/explorar.sh
+
+DOCKER-COMPOSE
+-----------------
+# Ver contenedores
+docker ps
+docker ps -a
+
+# Construir todos los servicios
+docker-compose build
+
+# Levantar todos los contenedores en segundo plano
+docker-compose up -d
+
+# Reconstruir contenedor específico
+docker-compose build backup
+docker-compose up -d backup
+
+docker-compose build explorador
+docker-compose up -d explorador
+
+COMANDOS DE VERIFICACIÓN
+---------------------------
+# Entrar a un contenedor
+docker exec -it maquina1 bash
+
+# Verificar archivos creados en las máquinas
+ls /home/users/documentos
+cat /home/users/documentos/archivo2.txt
+
+# Verificar backups desde el contenedor backup
+docker exec -it backup bash
+ls /home/backups/maquina1
+cat /home/backups/maquina1/archivo2.txt
+
+# Verificar alertas desde el contenedor explorador
+docker exec -it explorador bash
+cat /home/alertas_detectadas/alertas.log
+
+# Ver logs del cron
+docker logs -f explorador
+docker logs -f backup
+
+ACCESO VÍA WEB
+-----------------
+# Desde el navegador accedés a:
+http://localhost:8080/alertas.log

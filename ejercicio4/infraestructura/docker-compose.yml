@@ -1,0 +1,58 @@
+version: '3.8'
+
+services:
+  maquina1:
+    build: ./maquina
+    container_name: maquina1
+    volumes:
+      - maquina1_docs:/home/users/documentos
+    networks:
+      - redinfra
+
+  maquina2:
+    build: ./maquina
+    container_name: maquina2
+    volumes:
+      - maquina2_docs:/home/users/documentos
+    networks:
+      - redinfra
+
+  maquina3:
+    build: ./maquina
+    container_name: maquina3
+    volumes:
+      - maquina3_docs:/home/users/documentos
+    networks:
+      - redinfra
+
+  backup:
+    build: ./backup
+    container_name: backup
+    volumes:
+      - maquina1_docs:/mnt/maquina1:ro
+      - maquina2_docs:/mnt/maquina2:ro
+      - maquina3_docs:/mnt/maquina3:ro
+      - backup_storage:/home/backups
+    networks:
+      - redinfra
+
+  explorador:
+    build: ./explorador
+    container_name: explorador
+    ports:
+      - "8080:80"
+    volumes:
+      - backup_storage:/mnt/backups:ro
+      - alertas:/home/alertas_detectadas
+    networks:
+      - redinfra
+
+volumes:
+  maquina1_docs:
+  maquina2_docs:
+  maquina3_docs:
+  backup_storage:
+  alertas:
+
+networks:
+  redinfra:
