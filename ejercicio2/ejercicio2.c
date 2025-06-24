@@ -180,18 +180,6 @@ int main() {
     pthread_create(&t_CB, &attr, CB, NULL);
     pthread_create(&t_SN, &attr, SN, NULL);
 
-    pthread_join(t_IN, NULL);
-    pthread_join(t_M1, NULL);
-    pthread_join(t_F1, NULL);
-    pthread_join(t_QG, NULL);
-
-    pthread_join(t_TD, NULL);
-    pthread_join(t_FN, NULL);
-    pthread_join(t_MF, NULL);
-    pthread_join(t_MIN, NULL);
-    pthread_join(t_RR, NULL);
-    pthread_join(t_PR, NULL);
-    pthread_join(t_SR, NULL);
     pthread_join(t_INU, NULL);
     pthread_join(t_CB, NULL);
     pthread_join(t_SN, NULL);
