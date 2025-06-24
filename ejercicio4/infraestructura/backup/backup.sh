@@ -7,5 +7,6 @@ for maquina in maquina1 maquina2 maquina3; do
   destino="/home/backups/$maquina"
 
   mkdir -p "$destino"
-  rsync -av --ignore-existing "$origen" "$destino"
+  rsync -av "$origen" "$destino"
+
 done
