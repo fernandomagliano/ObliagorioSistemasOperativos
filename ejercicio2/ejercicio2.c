@@ -3,7 +3,7 @@
 #include <stdlib.h>
 #include <semaphore.h>
 
-sem_t semM2FN,
+sem_t 
     semF1FN, 
     semF1TD, 
     semQGTD, 
@@ -168,7 +168,6 @@ int main() {
     pthread_create(&t_M1, &attr, M1, NULL);
     pthread_create(&t_F1, &attr, F1, NULL);
     pthread_create(&t_QG, &attr, QG, NULL);
-    
     pthread_create(&t_TD, &attr, TD, NULL);
     pthread_create(&t_FN, &attr, FN, NULL);
     pthread_create(&t_MF, &attr, MF, NULL);
