@@ -66,3 +66,18 @@ ACCESO VÍA WEB
 -----------------
 # Desde el navegador accedés a:
 http://localhost:8080/alertas.log
+
+
+ssh-keygen -t rsa -b 2048 -f ./backup/id_rsa -q -N ""
+
+Esto crea:
+
+backup/id_rsa: clave privada
+backup/id_rsa.pub: clave pública
+
+ Copiar la clave pública a las máquinas
+Copiás el contenido de id_rsa.pub al archivo:
+
+maquina/authorized_keys
+
+Cada 2 minutos, cron ejecuta backup.sh, que se conecta por SSH con RSA a cada máquina, copia archivos nuevos con rsync, y los guarda en /home/backups/maquinaX.

@@ -1,12 +1,11 @@
 #!/bin/bash
 
-echo "[BACKUP] Ejecutando backup: $(date)"
+echo "[BACKUP] Ejecutando backup con RSA: $(date)"
 
-for maquina in maquina1 maquina2 maquina3; do
-  origen="/mnt/$maquina/"
-  destino="/home/backups/$maquina"
+for i in 1 2 3; do
+  origen="root@maquina$i:/home/users/documentos/"
+  destino="/home/backups/maquina$i"
 
   mkdir -p "$destino"
-  rsync -av "$origen" "$destino"
-
+  rsync -av -e "ssh -i /root/.ssh/id_rsa -o StrictHostKeyChecking=no" "$origen" "$destino"
 done
