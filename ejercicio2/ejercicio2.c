@@ -179,6 +179,7 @@ int main() {
     pthread_create(&t_CB, &attr, CB, NULL);
     pthread_create(&t_SN, &attr, SN, NULL);
 
+    pthread_join(t_IN, NULL);
     pthread_join(t_INU, NULL);
     pthread_join(t_CB, NULL);
     pthread_join(t_SN, NULL);
